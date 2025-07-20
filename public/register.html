@@ -1,0 +1,136 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Register - Furniture Store</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f4f4f4;
+      color: #333;
+      margin: 0;
+      padding: 0;
+      transition: background 0.5s ease, color 0.5s ease;
+    }
+
+    .dark-mode {
+      background-color: #121212;
+      color: #e0e0e0;
+    }
+
+    .toggle-btn {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      padding: 6px 14px;
+      font-size: 14px;
+      background-color: #5c67f2;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .toggle-btn:hover {
+      background-color: #4a55d1;
+    }
+
+    .form-container {
+      max-width: 400px;
+      margin: 100px auto;
+      padding: 30px;
+      background-color: #fff;
+      border-radius: 15px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+      transition: background 0.5s ease;
+    }
+
+    .dark-mode .form-container {
+      background-color: #1e1e1e;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"] {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      box-sizing: border-box;
+    }
+
+    button[type="submit"] {
+      width: 100%;
+      padding: 12px;
+      margin-top: 20px;
+      background-color: #5c67f2;
+      border: none;
+      border-radius: 6px;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button[type="submit"]:hover {
+      background-color: #4b54d3;
+    }
+
+    @media (max-width: 480px) {
+      .form-container {
+        margin: 60px 20px;
+        padding: 20px;
+      }
+
+      .toggle-btn {
+        top: 10px;
+        right: 10px;
+        font-size: 12px;
+        padding: 5px 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <button class="toggle-btn" onclick="toggleDarkMode()">🌙 Toggle Mode</button>
+
+  <div class="form-container">
+    <h2>Register</h2>
+    <form onsubmit="handleRegister(event)">
+      <label for="name">Name:</label>
+      <input type="text" id="name" required>
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" required>
+
+      <label for="password">Password:</label>
+      <input type="password" id="password" required>
+
+      <button type="submit">Register</button>
+    </form>
+  </div>
+
+  <script>
+    function toggleDarkMode() {
+      document.body.classList.toggle("dark-mode");
+    }
+
+    function handleRegister(event) {
+      event.preventDefault();
+
+      alert("🎉 Registration Successful!");
+      setTimeout(() => {
+        window.location.href = "product.html";
+      }, 1000);
+    }
+  </script>
+</body>
+</html>

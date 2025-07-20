@@ -1,0 +1,340 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Products - Furniture Store</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #f1f4f8;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 30px;
+      background-color: #fff;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 24px;
+      color: #333;
+    }
+
+    .cart-icon {
+      text-decoration: none;
+      color: #333;
+      font-size: 24px;
+      position: relative;
+    }
+
+    .cart-icon::after {
+      content: "🛒";
+      font-size: 28px;
+    }
+
+    h2 {
+      text-align: center;
+      margin-top: 30px;
+      color: #222;
+    }
+
+    .product-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 30px;
+      gap: 30px;
+    }
+
+    .product-card {
+      background-color: white;
+      border-radius: 12px;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      width: 250px;
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+
+    .product-card:hover {
+      transform: scale(1.03);
+    }
+
+    .product-card img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    .product-card h3 {
+      margin: 12px 0 8px;
+      font-size: 20px;
+      font-weight: 600;
+      color: #222;
+    }
+
+    .product-card p {
+      margin: 6px 0;
+      font-size: 14px;
+      color: #555;
+    }
+
+    .product-card strong {
+      color: #000;
+    }
+
+    .product-card input[type="number"] {
+      width: 60px;
+      padding: 5px;
+      margin-top: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    button {
+      background-color: #0d6efd;
+      color: white;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 8px;
+      margin-top: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    button:hover {
+      background-color: #004bbc;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Our Furniture Collection</h1>
+    <a href="cart.html" class="cart-icon" title="Go to Cart"></a>
+  </header>
+  <div class="product-container">
+    <!-- Example Products -->
+    <div class="product-card">
+      <img src="https://i.pinimg.com/originals/c7/98/c6/c798c6a5bf958f2a2073ef7e34b28fa1.jpg" alt="Modern Sofa">
+      <h2>Modern Sofa</h2>
+      <p>3-seater comfy sofa</p>
+      <p><strong>₹15,000</strong></p>
+      <input type="number" class="quantity-input" value="1" min="1" />
+      <button onclick="addToCart('Modern Sofa', 15000)">Add to Cart</button>
+    </div>
+
+    <div class="product-card">
+      <img src="https://tse3.mm.bing.net/th/id/OIP.S_-pX4GdvlIy-9dHu44uDgHaG9?pid=Api&P=0&h=220" alt="Dining Table">
+      <h2>Dining Table</h2>
+      <p>6-seater wooden table</p>
+      <p><strong>₹22,000</strong></p>
+      <input type="number" class="quantity-input" value="1" min="1" />
+      <button onclick="addToCart('Dining Table', 22000)">Add to Cart</button>
+    </div>
+
+    <div class="product-card">
+      <img src="https://i5.walmartimages.com/asr/21970536-9d11-4e47-b7a8-6bb792285691_1.59d84ece3dafa40a306a5ff49e6efce7.jpeg" alt="Recliner Chair">
+      <h2>Recliner Chair</h2>
+      <p>Comfy recliner chair</p>
+      <p><strong>₹9,500</strong></p>
+      <input type="number" class="quantity-input" value="1" min="1" />
+      <button onclick="addToCart('Recliner Chair', 9500)">Add to Cart</button>
+    </div>
+
+    <div class="product-card">
+      <img src="https://m.media-amazon.com/images/I/81lzsVHJK-L.jpg" alt="Queen Bed">
+      <h2>Queen Bed</h2>
+      <p>Queen bed with storage</p>
+      <p><strong>₹25,000</strong></p>
+      <input type="number" class="quantity-input" value="1" min="1" />
+      <button onclick="addToCart('Queen Bed', 25000)">Add to Cart</button>
+    </div>
+
+    <div class="product-card">
+      <img src="https://i5.walmartimages.com/asr/62a7918d-cec6-4862-8920-5b35582a4401.2075708e0500063ed4c6cedd42d75b6f.jpeg" alt="TV Stand">
+      <h2>TV Stand</h2>
+      <p>Stylish wooden TV unit</p>
+      <p><strong>₹8,000</strong></p>
+      <input type="number" class="quantity-input" value="1" min="1" />
+      <button onclick="addToCart('TV Stand', 8000)">Add to Cart</button>
+    </div>
+
+    <div class="product-card">
+      <img src="https://greentechinteriors.in/wp-content/uploads/2023/08/wardrobe-design-scaled.jpg" alt="Wardrobe">
+      <h2>Wardrobe</h2>
+      <p>3-door storage wardrobe</p>
+      <p><strong>₹18,000</strong></p>
+      <input type="number" class="quantity-input" value="1" min="1" />
+      <button onclick="addToCart('Wardrobe', 18000)">Add to Cart</button>
+    </div>
+
+    <div class="product-card">
+      <img src="https://menterarchitects.com/wp-content/uploads/2017/09/furniture-round-coffee-table-sets-ideas-dark-brown-modern-solid-intended-for-dark-wood-round-coffee-tables.jpg" alt="Coffee Table">
+      <h2>Coffee Table</h2>
+      <p>Elegant glass table</p>
+      <p><strong>₹6,000</strong></p>
+      <input type="number" class="quantity-input" value="1" min="1" />
+      <button onclick="addToCart('Coffee Table', 6000)">Add to Cart</button>
+    </div>
+
+    <div class="product-card">
+      <img src="https://m.media-amazon.com/images/I/81WcJZtuMOL._AC_SL1500_.jpg" alt="Bookshelf">
+      <h2>Bookshelf</h2>
+      <p>5-layer wooden shelf</p>
+      <p><strong>₹7,200</strong></p>
+      <input type="number" class="quantity-input" value="1" min="1" />
+      <button onclick="addToCart('Bookshelf', 7200)">Add to Cart</button>
+    </div>
+
+    <div class="product-card">
+      <img src="https://m.media-amazon.com/images/I/81-XJyHEUOL.jpg" alt="Office Chair">
+      <h2>Office Chair</h2>
+      <p>Ergonomic chair with wheels</p>
+      <p><strong>₹5,500</strong></p>
+      <input type="number" class="quantity-input" value="1" min="1" />
+      <button onclick="addToCart('Office Chair', 5500)">Add to Cart</button>
+    </div>
+
+    <div class="product-card">
+      <img src="https://i5.walmartimages.com/asr/63a7cf66-70ab-4fc2-93c3-468726778d51.9202441f1425be7893ed82eb2a2e707c.jpeg" alt="Study Desk">
+      <h2>Study Desk</h2>
+      <p>Compact wooden desk</p>
+      <p><strong>₹6,800</strong></p>
+      <input type="number" class="quantity-input" value="1" min="1" />
+      <button onclick="addToCart('Study Desk', 6800)">Add to Cart</button>
+    </div>
+
+    <div class="product-card">
+      <img src="https://foter.com/photos/420/decorative-square-wall-shelf.jpeg" alt="Wall Shelf">
+      <h2>Wall Shelf</h2>
+      <p>Floating shelf set of 3</p>
+      <p><strong>₹2,200</strong></p>
+      <input type="number" class="quantity-input" value="1" min="1" />
+      <button onclick="addToCart('Wall Shelf', 2200)">Add to Cart</button>
+    </div>
+
+    <div class="product-card">
+      <img src="https://tse3.mm.bing.net/th/id/OIP.fL46JSztuVr2taIkH-n6igHaHa?pid=Api&P=0&h=220" alt="Side Table">
+      <h2>Side Table</h2>
+      <p>Wooden end table</p>
+      <p><strong>₹3,000</strong></p>
+      <input type="number" class="quantity-input" value="1" min="1" />
+      <button onclick="addToCart('Side Table', 3000)">Add to Cart</button>
+    </div>
+
+    <div class="product-card">
+      <img src="https://m.media-amazon.com/images/I/71Ag3ZttNYL.jpg" alt="Mirror">
+      <h2>Wall Mirror</h2>
+      <p>Decorative oval mirror</p>
+      <p><strong>₹1,800</strong></p>
+      <input type="number" class="quantity-input" value="1" min="1" />
+      <button onclick="addToCart('Wall Mirror', 1800)">Add to Cart</button>
+    </div>
+
+    <div class="product-card">
+      <img src="https://i5.walmartimages.com/asr/7190c88e-fb59-42b6-a4cb-599afbee9461.7d45fad3fcc70c4d0e2d9d2e436b8e1a.jpeg" alt="Bar Stool">
+      <h2>Bar Stool</h2>
+      <p>Adjustable steel stool</p>
+      <p><strong>₹2,800</strong></p>
+      <input type="number" class="quantity-input" value="1" min="1" />
+      <button onclick="addToCart('Bar Stool', 2800)">Add to Cart</button>
+    </div>
+
+    <div class="product-card">
+      <img src="https://hips.hearstapps.com/hmg-prod/images/ladwig-home-highres-27-1666963207.jpg?crop=0.999875015623047xw:1xh;center,top&resize=980:*" alt="Cabinet">
+      <h2>Kitchen Cabinet</h2>
+      <p>Modular storage unit</p>
+      <p><strong>₹12,000</strong></p>
+      <input type="number" class="quantity-input" value="1" min="1" />
+      <button onclick="addToCart('Kitchen Cabinet', 12000)">Add to Cart</button>
+    </div>
+
+    <!-- Add 5 more below similarly -->
+    <div class="product-card">
+      <img src="https://tse1.mm.bing.net/th/id/OIP.aCJnsEWQub7n3GtfRQENPwHaF0?pid=Api&P=0&h=220" alt="Bench">
+      <h2>Entryway Bench</h2>
+      <p>Seating with storage</p>
+      <p><strong>₹4,000</strong></p>
+      <input type="number" class="quantity-input" value="1" min="1" />
+      <button onclick="addToCart('Entryway Bench', 4000)">Add to Cart</button>
+    </div>
+
+    <div class="product-card">
+      <img src="https://i5.walmartimages.com/asr/a8548550-8617-4ed1-8e0a-99782793682a_1.26d5d396a5c4c6cb2cc6c43688134d5e.jpeg" alt="Lamp">
+      <h2>Floor Lamp</h2>
+      <p>Stylish standing lamp</p>
+      <p><strong>₹1,900</strong></p>
+      <input type="number" class="quantity-input" value="1" min="1" />
+      <button onclick="addToCart('Floor Lamp', 1900)">Add to Cart</button>
+    </div>
+
+    <div class="product-card">
+      <img src="https://images.woodenstreet.de/image/data/bunk-beds/cheshire-bunk-bed-revised/honey/updated/1.jpg" alt="Kids Bed">
+      <h2>Kids Bed</h2>
+      <p>Colorful bunk bed</p>
+      <p><strong>₹16,000</strong></p>
+      <input type="number" class="quantity-input" value="1" min="1" />
+      <button onclick="addToCart('Kids Bed', 16000)">Add to Cart</button>
+    </div>
+
+    <div class="product-card">
+      <img src="https://images.woodenstreet.de/image/data/rocking-chairs/marcus-wooden-handmade-pure-sheesham-wood-rocking-chair-wooden-recliner/updated/1.jpg" alt="Rocking Chair">
+      <h2>Rocking Chair</h2>
+      <p>Classic wooden design</p>
+      <p><strong>₹5,700</strong></p>
+      <input type="number" class="quantity-input" value="1" min="1" />
+      <button onclick="addToCart('Rocking Chair', 5700)">Add to Cart</button>
+    </div>
+
+    <div class="product-card">
+      <img src="https://i5.walmartimages.com/asr/c0aae0f9-7438-4fc1-ab68-87a49c4f17ab_1.c2f7d67d54fcd8076715a3e0718a7fd3.jpeg" alt="Storage Box">
+      <h2>Storage Box</h2>
+      <p>Under-bed storage container</p>
+      <p><strong>₹1,300</strong></p>
+      <input type="number" class="quantity-input" value="1" min="1" />
+      <button onclick="addToCart('Storage Box', 1300)">Add to Cart</button>
+    </div>
+
+ 
+  </div>
+
+  <script src="js/main.js"></script>
+  <script>
+   document.querySelectorAll('.add-to-cart').forEach(button => {
+    button.addEventListener('click', () => {
+      const card = button.closest('.product-card');
+
+      const name = card.querySelector('.card-title').textContent;
+      const description = card.querySelector('.card-desc').textContent;
+      const priceText = card.querySelector('.card-price').textContent;
+      const quantity = parseInt(card.querySelector('.quantity-input').value);
+
+      if (isNaN(quantity) || quantity < 1) {
+        alert("Please enter a valid quantity.");
+        return;
+      }
+
+      const price = parseInt(priceText.replace(/[^\d]/g, ''));
+
+      for (let i = 0; i < quantity; i++) {
+        addToCart(name, description, price);
+      }
+    });
+  });
+  </script>
+</body>
+</html>

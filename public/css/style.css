@@ -1,0 +1,99 @@
+/* public/css/style.css
+body {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+}
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.product-card {
+  border: 1px solid #ddd;
+  padding: 10px;
+  width: 200px;
+}
+.product-card img {
+  width: 100%;
+  height: auto;
+} */
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: url('../images/your-living-room.png') no-repeat center center fixed;
+  background-size: cover;
+  color: #222;
+  margin: 0;
+  padding: 20px;
+  transition: background-color 0.4s, color 0.4s;
+}
+
+.dark-mode {
+  background-color: rgba(0, 0, 0, 0.85);
+  color: #fff;
+}
+
+#theme-toggle {
+  padding: 10px 15px;
+  border: none;
+  background-color: #555;
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.content {
+  max-width: 500px;
+  margin: 40px auto;
+  background-color: rgba(255, 255, 255, 0.85);
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+.dark-mode .content {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.links a {
+  display: inline-block;
+  margin: 10px;
+  padding: 10px 15px;
+  text-decoration: none;
+  background-color: #3366cc;
+  color: #fff;
+  border-radius: 10px;
+  transition: 0.3s;
+}
+
+.links a:hover {
+  background-color: #254e90;
+}
+
+.form-box {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.form-box input,
+.form-box button {
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+}
+
+.form-box button {
+  background-color: #2e8b57;
+  color: white;
+  cursor: pointer;
+}
+
+.form-box button:hover {
+  background-color: #246c44;
+}

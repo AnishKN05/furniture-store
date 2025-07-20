@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Checkout - Furniture Store</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f3f3f3;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: auto;
+      background: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      margin-bottom: 20px;
+    }
+
+    .section {
+      margin-bottom: 30px;
+    }
+
+    .summary-item {
+      padding: 10px 0;
+      border-bottom: 1px solid #ccc;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    .form-group label {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    .btn {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 15px 20px;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+      width: 100%;
+      font-weight: bold;
+    }
+
+    .btn:hover {
+      background-color: #45a049;
+    }
+
+    .total {
+      font-size: 18px;
+      font-weight: bold;
+      text-align: right;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Checkout</h2>
+
+    <!-- Cart Summary -->
+    <div class="section">
+      <h3>Cart Summary</h3>
+      <div id="summary"></div>
+      <div class="total" id="total"></div>
+    </div>
+
+    <!-- Delivery Address -->
+    <div class="section">
+      <h3>Delivery Address</h3>
+      <div class="form-group">
+        <label for="name">Full Name</label>
+        <input type="text" id="name" placeholder="John Doe" required />
+      </div>
+      <div class="form-group">
+        <label for="address">Address</label>
+        <textarea id="address" placeholder="123 Main Street, City, State" rows="3" required></textarea>
+      </div>
+      <div class="form-group">
+        <label for="pincode">Pincode</label>
+        <input type="text" id="pincode" placeholder="123456" required />
+      </div>
+    </div>
+
+    <!-- Payment Method -->
+    <div class="section">
+      <h3>Payment</h3>
+      <div class="form-group">
+        <label for="payment">Select Payment Method</label>
+        <select id="payment" required>
+          <option value="">-- Select --</option>
+          <option value="cod">Cash on Delivery</option>
+          <option value="upi">UPI</option>
+          <option value="card">Credit/Debit Card</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Place Order Button -->
+    <button class="btn" onclick="placeOrder()">Place Order</button>
+  </div>
+
+  <script>
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const summaryDiv = document.getElementById('summary');
+    const totalDiv = document.getElementById('total');
+    let totalAmount = 0;
+
+    if (cart.length === 0) {
+      summaryDiv.innerHTML = "<p>Your cart is empty.</p>";
+    } else {
+      cart.forEach(item => {
+        const itemDiv = document.createElement('div');
+        itemDiv.className = "summary-item";
+
+        const quantity = parseInt(item.quantity) || 1;
+        const unitPrice = parseFloat(item.description) || 0; // Use description as price
+        const price = unitPrice * quantity;
+        totalAmount += price;
+
+        itemDiv.innerHTML = `
+          <strong>${item.name}</strong><br>
+          Quantity: ${quantity}<br>
+          Price: ₹${unitPrice} x ${quantity} = ₹${price}
+        `;
+        summaryDiv.appendChild(itemDiv);
+      });
+
+      totalDiv.innerHTML = `Total Amount: ₹${totalAmount.toLocaleString()}`;
+    }
+
+    function placeOrder() {
+      const name = document.getElementById('name').value.trim();
+      const address = document.getElementById('address').value.trim();
+      const pincode = document.getElementById('pincode').value.trim();
+      const payment = document.getElementById('payment').value;
+
+      if (!name || !address || !pincode || !payment) {
+        alert("Please fill all fields before placing the order.");
+        return;
+      }
+
+      // Clear cart
+      localStorage.removeItem('cart');
+
+      alert("Order placed successfully!\nThank you for shopping with us.");
+      window.location.href = "product.html";
+    }
+  </script>
+</body>
+</html>
