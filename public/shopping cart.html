@@ -1,113 +1,3 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Your Cart</title>
-  <link rel="stylesheet" href="css/style.css" />
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      padding: 20px;
-      background: #f9f9f9;
-    }
-
-    .header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .header h1 {
-      margin: 0;
-    }
-
-    .cart-buttons {
-      display: flex;
-      gap: 10px;
-    }
-
-    button {
-      padding: 10px 15px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      font-weight: bold;
-    }
-
-    .empty-btn {
-      background-color: #ff4d4d;
-      color: white;
-    }
-
-    .checkout-btn {
-      background-color: #4CAF50;
-      color: white;
-    }
-
-    .cart-item {
-      background-color: white;
-      padding: 15px;
-      margin-top: 15px;
-      border-radius: 8px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    }
-
-    .cart-item h4 {
-      margin-bottom: 5px;
-    }
-  </style>
-</head>
-<body>
-  <div class="header">
-    <h1>Your Cart</h1>
-    <div class="cart-buttons">
-      <button class="empty-btn" onclick="emptyCart()">Empty Cart</button>
-      <button class="checkout-btn" onclick="goToCheckout()">Checkout</button>
-    </div>
-  </div>
-
-  <div id="cart-items"></div>
-
-  <script>
-    const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
-    const cartContainer = document.getElementById('cart-items');
-
-    if (cartItems.length === 0) {
-      cartContainer.innerHTML = "<p>Your cart is empty.</p>";
-    } else {
-      cartItems.forEach(item => {
-        
-        const itemDiv = document.createElement('div');
-        itemDiv.className = "cart-item";
-        itemDiv.innerHTML = `
-          <h4>${item.name}</h4>
-         <p>Price: ₹${item.description}</p>
-          <p>Quantity: ${item.quantity || 1}</p>
-        `;
-        cartContainer.appendChild(itemDiv);
-      });
-    }
-
-    function emptyCart() {
-      localStorage.removeItem('cart');
-      location.reload();
-    }
-
-    function goToCheckout() {
-      window.location.href = "checkout.html";
-    }
-  </script>
-</body>
-</html>  -->
-
-
-
-
-
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -126,17 +16,17 @@
         }
     </style>
 </head>
-<body class="bg-[#f7f3ef] min-h-screen flex flex-col">
+<body class="bg-[#f7f3ef]">
 
     <!-- Top Navigation Bar -->
     <header class="bg-white shadow-md p-4 sticky top-0 z-50">
         <nav class="flex justify-between items-center max-w-7xl mx-auto">
             <div class="flex items-center space-x-2">
-                <a href="index.html" class="flex items-center space-x-2 text-gray-800 hover:text-orange-500">
-                    <svg class="h-8 w-8 text-orange-500" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2ZM12 4C16.4183 4 20 7.58172 20 12C20 16.4183 16.4183 20 12 20C7.58172 20 4 16.4183 4 12C4 7.58172 7.58172 4 12 4ZM12 6C9.79086 6 8 7.79086 8 10C8 12.2091 9.79086 14 12 14C14.2091 14 16 12.2091 16 10C16 7.79086 14.2091 6 12 6ZM12 8C13.1046 8 14 8.89543 14 10C14 11.1046 13.1046 12 12 12C10.8954 12 10 11.1046 10 10C10 8.89543 10.8954 8 12 8ZM12 15C9.33924 15 7.15197 16.712 6.30453 19H17.6955C16.848 16.712 14.6608 15 12 15Z" fill="currentColor"/>
-                    <span class="font-bold text-xl text-gray-800">Sit & Story</span>
-                </a>
+                <!-- Logo with Placeholder -->
+                <svg class="h-8 w-8 text-orange-500" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2ZM12 4C16.4183 4 20 7.58172 20 12C20 16.4183 16.4183 20 12 20C7.58172 20 4 16.4183 4 12C4 7.58172 7.58172 4 12 4ZM12 6C9.79086 6 8 7.79086 8 10C8 12.2091 9.79086 14 12 14C14.2091 14 16 12.2091 16 10C16 7.79086 14.2091 6 12 6ZM12 8C13.1046 8 14 8.89543 14 10C14 11.1046 13.1046 12 12 12C10.8954 12 10 11.1046 10 10C10 8.89543 10.8954 8 12 8ZM12 15C9.33924 15 7.15197 16.712 6.30453 19H17.6955C16.848 16.712 14.6608 15 12 15Z" fill="currentColor"/>
+                </svg>
+                <span class="font-bold text-xl text-gray-800">Furniture Store</span>
             </div>
             <div class="flex-grow flex justify-center space-x-6 text-gray-600 font-semibold">
                 <a href="index.html" class="hover:text-orange-500">Home</a>
@@ -152,7 +42,7 @@
                     <i class="fa-solid fa-user"></i>
                     <span>Profile</span>
                 </a>
-                <a href="signout.html" class="flex items-center space-x-1 text-gray-800 hover:text-orange-500">
+                <a href="index.html" class="flex items-center space-x-1 text-gray-800 hover:text-orange-500">
                     <i class="fa-solid fa-arrow-right-from-bracket"></i>
                     <span>Sign Out</span>
                 </a>
@@ -160,25 +50,24 @@
         </nav>
     </header>
 
-    <main class="max-w-4xl mx-auto p-8 flex-grow">
+    <main class="max-w-4xl mx-auto p-8">
         <h1 class="text-4xl font-bold text-gray-800 mb-8">Your Shopping Cart</h1>
 
         <div id="cart-items" class="bg-white rounded-lg shadow-md p-6 mb-8">
             <!-- Cart items will be rendered here by JavaScript -->
         </div>
 
-        <div class="flex flex-col md:flex-row justify-between items-center bg-white rounded-lg shadow-md p-6">
-            <h2 class="text-2xl font-semibold text-gray-800 mb-4 md:mb-0">Total: <span id="cart-total" class="font-bold">₹0</span></h2>
+        <div class="flex justify-between items-center bg-white rounded-lg shadow-md p-6">
+            <h2 class="text-2xl font-semibold text-gray-800">Total: <span id="cart-total" class="font-bold">₹0</span></h2>
             <button id="checkout-btn" class="bg-orange-500 text-white px-6 py-3 rounded-lg font-semibold text-lg transition-colors duration-300 hover:bg-orange-600">Checkout</button>
         </div>
     </main>
-    
+
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const cartItemsContainer = document.getElementById('cart-items');
             const cartTotalElement = document.getElementById('cart-total');
             const cartCountElement = document.getElementById('cart-count');
-            const checkoutBtn = document.getElementById('checkout-btn');
 
             const getCart = () => {
                 return JSON.parse(localStorage.getItem('cart')) || [];
@@ -210,9 +99,9 @@
                     total += itemTotal;
 
                     const itemElement = document.createElement('div');
-                    itemElement.classList.add('flex', 'flex-col', 'sm:flex-row', 'items-center', 'justify-between', 'mb-4', 'pb-4', 'border-b', 'border-gray-200');
+                    itemElement.classList.add('flex', 'items-center', 'justify-between', 'mb-4', 'pb-4', 'border-b', 'border-gray-200');
                     itemElement.innerHTML = `
-                        <div class="flex items-center space-x-4 mb-2 sm:mb-0">
+                        <div class="flex items-center space-x-4">
                             <img src="${item.image}" alt="${item.name}" class="h-16 w-16 object-cover rounded-lg">
                             <div>
                                 <h3 class="font-semibold text-gray-800">${item.name}</h3>
@@ -242,19 +131,10 @@
                 });
             };
 
-            // Add click event listener to the Checkout button
-            checkoutBtn.addEventListener('click', () => {
-                const cart = getCart();
-                if (cart.length === 0) {
-                    alert('Your cart is empty. Please add items before checking out.');
-                } else {
-                    window.location.assign('checkout.html');
-                }
-            });
-
             updateCartCount();
             renderCartItems();
         });
     </script>
+
 </body>
 </html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Your Profile</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7f3ef;
+        }
+    </style>
+</head>
+<body class="bg-[#f7f3ef]">
+
+    <!-- Top Navigation Bar -->
+    <header class="bg-white shadow-md p-4 sticky top-0 z-50">
+        <nav class="flex justify-between items-center max-w-7xl mx-auto">
+            <div class="flex items-center space-x-2">
+                <!-- Logo with Placeholder -->
+                <svg class="h-8 w-8 text-orange-500" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2ZM12 4C16.4183 4 20 7.58172 20 12C20 16.4183 16.4183 20 12 20C7.58172 20 4 16.4183 4 12C4 7.58172 7.58172 4 12 4ZM12 6C9.79086 6 8 7.79086 8 10C8 12.2091 9.79086 14 12 14C14.2091 14 16 12.2091 16 10C16 7.79086 14.2091 6 12 6ZM12 8C13.1046 8 14 8.89543 14 10C14 11.1046 13.1046 12 12 12C10.8954 12 10 11.1046 10 10C10 8.89543 10.8954 8 12 8ZM12 15C9.33924 15 7.15197 16.712 6.30453 19H17.6955C16.848 16.712 14.6608 15 12 15Z" fill="currentColor"/>
+                </svg>
+                <span class="font-bold text-xl text-gray-800">Furniture Store</span>
+            </div>
+            <div class="flex-grow flex justify-center space-x-6 text-gray-600 font-semibold">
+                <a href="index.html" class="hover:text-orange-500">Home</a>
+                <a href="product.html" class="hover:text-orange-500">Products</a>
+                <a href="orders.html" class="hover:text-orange-500">Orders</a>
+            </div>
+            <div class="flex items-center space-x-4">
+                <a href="cart.html" class="relative">
+                    <i class="fa-solid fa-cart-shopping text-gray-800 text-lg"></i>
+                    <span id="cart-count" class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full px-2 py-0.5">0</span>
+                </a>
+                <a href="profile.html" class="flex items-center space-x-1 text-gray-800 hover:text-orange-500">
+                    <i class="fa-solid fa-user"></i>
+                    <span>Profile</span>
+                </a>
+                <a href="index.html" class="flex items-center space-x-1 text-gray-800 hover:text-orange-500">
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                    <span>Sign Out</span>
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="max-w-4xl mx-auto p-8">
+        <h1 class="text-4xl font-bold text-gray-800 mb-8">Your Profile</h1>
+
+        <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+            <h2 class="text-2xl font-semibold text-gray-800 mb-4">User Details</h2>
+            <div class="space-y-4">
+                <div>
+                    <p class="text-gray-500">Name:</p>
+                    <p class="text-gray-800 font-medium">John Doe</p>
+                </div>
+                <div>
+                    <p class="text-gray-500">Email:</p>
+                    <p class="text-gray-800 font-medium">john.doe@example.com</p>
+                </div>
+                <div>
+                    <p class="text-gray-500">Member Since:</p>
+                    <p class="text-gray-800 font-medium">January 2025</p>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const cartCountElement = document.getElementById('cart-count');
+            const getCart = () => JSON.parse(localStorage.getItem('cart')) || [];
+            const updateCartCount = () => {
+                const cart = getCart();
+                const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+                cartCountElement.textContent = totalItems;
+            };
+            updateCartCount();
+        });
+    </script>
+</body>
+</html>
