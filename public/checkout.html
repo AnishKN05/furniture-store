@@ -1,176 +1,241 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Checkout - Furniture Store</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <link rel="stylesheet" href="css/style.css" />
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f3f3f3;
-      margin: 0;
-      padding: 20px;
-    }
-
-    .container {
-      max-width: 800px;
-      margin: auto;
-      background: #fff;
-      padding: 30px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-
-    h2 {
-      margin-bottom: 20px;
-    }
-
-    .section {
-      margin-bottom: 30px;
-    }
-
-    .summary-item {
-      padding: 10px 0;
-      border-bottom: 1px solid #ccc;
-    }
-
-    .form-group {
-      margin-bottom: 15px;
-    }
-
-    .form-group label {
-      font-weight: bold;
-      display: block;
-      margin-bottom: 5px;
-    }
-
-    .form-group input,
-    .form-group select,
-    .form-group textarea {
-      width: 100%;
-      padding: 10px;
-      font-size: 16px;
-      border-radius: 5px;
-      border: 1px solid #ccc;
-    }
-
-    .btn {
-      background-color: #4CAF50;
-      color: white;
-      border: none;
-      padding: 15px 20px;
-      font-size: 16px;
-      border-radius: 5px;
-      cursor: pointer;
-      width: 100%;
-      font-weight: bold;
-    }
-
-    .btn:hover {
-      background-color: #45a049;
-    }
-
-    .total {
-      font-size: 18px;
-      font-weight: bold;
-      text-align: right;
-      margin-top: 10px;
-    }
-  </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Checkout - Furniture Store</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7f3ef;
+        }
+        .message-box {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 2rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            z-index: 1000;
+            display: none;
+            text-align: center;
+        }
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            z-index: 999;
+            display: none;
+        }
+    </style>
 </head>
-<body>
-  <div class="container">
-    <h2>Checkout</h2>
+<body class="bg-[#f7f3ef] min-h-screen flex flex-col">
 
-    <!-- Cart Summary -->
-    <div class="section">
-      <h3>Cart Summary</h3>
-      <div id="summary"></div>
-      <div class="total" id="total"></div>
+    <!-- Top Navigation Bar -->
+    <header class="bg-white shadow-md p-4 sticky top-0 z-50">
+        <nav class="flex justify-between items-center max-w-7xl mx-auto">
+            <div class="flex items-center space-x-2">
+                <a href="index.html" class="flex items-center space-x-2 text-gray-800 hover:text-orange-500">
+                    <svg class="h-8 w-8 text-orange-500" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2ZM12 4C16.4183 4 20 7.58172 20 12C20 16.4183 16.4183 20 12 20C7.58172 20 4 16.4183 4 12C4 7.58172 7.58172 4 12 4ZM12 6C9.79086 6 8 7.79086 8 10C8 12.2091 9.79086 14 12 14C14.2091 14 16 12.2091 16 10C16 7.79086 14.2091 6 12 6ZM12 8C13.1046 8 14 8.89543 14 10C14 11.1046 13.1046 12 12 12C10.8954 12 10 11.1046 10 10C10 8.89543 10.8954 8 12 8ZM12 15C9.33924 15 7.15197 16.712 6.30453 19H17.6955C16.848 16.712 14.6608 15 12 15Z" fill="currentColor"/>
+                    <span class="font-bold text-xl text-gray-800">Furniture Store</span>
+                </a>
+            </div>
+            <div class="flex-grow flex justify-center space-x-6 text-gray-600 font-semibold">
+                <a href="index.html" class="hover:text-orange-500">Home</a>
+                <a href="product.html" class="hover:text-orange-500">Products</a>
+                <a href="orders.html" class="hover:text-orange-500">Orders</a>
+            </div>
+            <div class="flex items-center space-x-4">
+                <a href="cart.html" class="relative">
+                    <i class="fa-solid fa-cart-shopping text-gray-800 text-lg"></i>
+                    <span id="cart-count" class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full px-2 py-0.5">0</span>
+                </a>
+                <a href="profile.html" class="flex items-center space-x-1 text-gray-800 hover:text-orange-500">
+                    <i class="fa-solid fa-user"></i>
+                    <span>Profile</span>
+                </a>
+                <a href="index.html" class="flex items-center space-x-1 text-gray-800 hover:text-orange-500">
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                    <span>Sign Out</span>
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="max-w-4xl mx-auto p-8 flex-grow">
+        <h1 class="text-4xl font-bold text-gray-800 mb-8">Checkout</h1>
+
+        <div class="bg-white rounded-lg shadow-md p-6 mb-8 flex flex-col md:flex-row gap-8">
+            <!-- Cart Summary -->
+            <div class="md:w-1/2">
+                <h3 class="text-2xl font-semibold text-gray-800 mb-4">Order Summary</h3>
+                <div id="summary-items" class="space-y-4">
+                    <!-- Cart summary items will be rendered here by JS -->
+                </div>
+                <div id="summary-total" class="text-right mt-4 pt-4 border-t border-gray-200">
+                    <span class="text-lg font-bold text-gray-900">Total: ₹0</span>
+                </div>
+            </div>
+
+            <!-- Delivery and Payment Form -->
+            <div class="md:w-1/2">
+                <h3 class="text-2xl font-semibold text-gray-800 mb-4">Delivery & Payment</h3>
+                <form id="checkout-form" class="space-y-4">
+                    <div class="space-y-2">
+                        <label for="name" class="block text-sm font-medium text-gray-700">Full Name</label>
+                        <input type="text" id="name" class="w-full p-3 border border-gray-300 rounded-md focus:ring-orange-500 focus:border-orange-500" required>
+                    </div>
+                    <div class="space-y-2">
+                        <label for="address" class="block text-sm font-medium text-gray-700">Address</label>
+                        <textarea id="address" rows="3" class="w-full p-3 border border-gray-300 rounded-md focus:ring-orange-500 focus:border-orange-500" required></textarea>
+                    </div>
+                    <div class="space-y-2">
+                        <label for="pincode" class="block text-sm font-medium text-gray-700">Pincode</label>
+                        <input type="text" id="pincode" class="w-full p-3 border border-gray-300 rounded-md focus:ring-orange-500 focus:border-orange-500" required>
+                    </div>
+                    <div class="space-y-2">
+                        <label for="payment" class="block text-sm font-medium text-gray-700">Payment Method</label>
+                        <select id="payment" class="w-full p-3 border border-gray-300 rounded-md focus:ring-orange-500 focus:border-orange-500" required>
+                            <option value="">-- Select --</option>
+                            <option value="cod">Cash on Delivery</option>
+                            <option value="upi">UPI</option>
+                            <option value="card">Credit/Debit Card</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="w-full bg-orange-500 text-white px-6 py-3 rounded-lg font-semibold text-lg transition-colors duration-300 hover:bg-orange-600">Place Order</button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <!-- Overlay and Message Box -->
+    <div id="overlay" class="overlay"></div>
+    <div id="message-box" class="message-box bg-white text-gray-800">
+        <div id="message-content"></div>
+        <button id="close-message" class="mt-4 bg-orange-500 text-white px-4 py-2 rounded-lg">Close</button>
     </div>
 
-    <!-- Delivery Address -->
-    <div class="section">
-      <h3>Delivery Address</h3>
-      <div class="form-group">
-        <label for="name">Full Name</label>
-        <input type="text" id="name" placeholder="John Doe" required />
-      </div>
-      <div class="form-group">
-        <label for="address">Address</label>
-        <textarea id="address" placeholder="123 Main Street, City, State" rows="3" required></textarea>
-      </div>
-      <div class="form-group">
-        <label for="pincode">Pincode</label>
-        <input type="text" id="pincode" placeholder="123456" required />
-      </div>
-    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const cartCountElement = document.getElementById('cart-count');
+            const summaryItemsContainer = document.getElementById('summary-items');
+            const summaryTotalElement = document.getElementById('summary-total').querySelector('span');
+            const checkoutForm = document.getElementById('checkout-form');
+            const messageBox = document.getElementById('message-box');
+            const overlay = document.getElementById('overlay');
+            const messageContent = document.getElementById('message-content');
+            const closeMessageBtn = document.getElementById('close-message');
 
-    <!-- Payment Method -->
-    <div class="section">
-      <h3>Payment</h3>
-      <div class="form-group">
-        <label for="payment">Select Payment Method</label>
-        <select id="payment" required>
-          <option value="">-- Select --</option>
-          <option value="cod">Cash on Delivery</option>
-          <option value="upi">UPI</option>
-          <option value="card">Credit/Debit Card</option>
-        </select>
-      </div>
-    </div>
+            const getCart = () => {
+                return JSON.parse(localStorage.getItem('cart')) || [];
+            };
 
-    <!-- Place Order Button -->
-    <button class="btn" onclick="placeOrder()">Place Order</button>
-  </div>
+            const saveCart = (cart) => {
+                localStorage.setItem('cart', JSON.stringify(cart));
+            };
 
-  <script>
-    const cart = JSON.parse(localStorage.getItem('cart')) || [];
-    const summaryDiv = document.getElementById('summary');
-    const totalDiv = document.getElementById('total');
-    let totalAmount = 0;
+            const updateCartCount = () => {
+                const cart = getCart();
+                const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+                cartCountElement.textContent = totalItems;
+            };
 
-    if (cart.length === 0) {
-      summaryDiv.innerHTML = "<p>Your cart is empty.</p>";
-    } else {
-      cart.forEach(item => {
-        const itemDiv = document.createElement('div');
-        itemDiv.className = "summary-item";
+            const renderSummary = () => {
+                const cart = getCart();
+                summaryItemsContainer.innerHTML = '';
+                let total = 0;
 
-        const quantity = parseInt(item.quantity) || 1;
-        const unitPrice = parseFloat(item.description) || 0; // Use description as price
-        const price = unitPrice * quantity;
-        totalAmount += price;
+                if (cart.length === 0) {
+                    summaryItemsContainer.innerHTML = '<p class="text-gray-500">Your cart is empty.</p>';
+                } else {
+                    cart.forEach(item => {
+                        const itemTotal = item.price * item.quantity;
+                        total += itemTotal;
 
-        itemDiv.innerHTML = `
-          <strong>${item.name}</strong><br>
-          Quantity: ${quantity}<br>
-          Price: ₹${unitPrice} x ${quantity} = ₹${price}
-        `;
-        summaryDiv.appendChild(itemDiv);
-      });
+                        const itemElement = document.createElement('div');
+                        itemElement.classList.add('flex', 'justify-between', 'items-center', 'py-2', 'border-b', 'border-gray-100');
+                        itemElement.innerHTML = `
+                            <span class="text-gray-700">${item.name} (${item.quantity})</span>
+                            <span class="font-semibold text-gray-900">₹${itemTotal.toLocaleString()}</span>
+                        `;
+                        summaryItemsContainer.appendChild(itemElement);
+                    });
+                }
+                summaryTotalElement.textContent = `₹${total.toLocaleString()}`;
+            };
 
-      totalDiv.innerHTML = `Total Amount: ₹${totalAmount.toLocaleString()}`;
-    }
+            const showMessage = (message, isError = false) => {
+                messageContent.innerHTML = message;
+                messageBox.classList.remove('bg-white', 'text-gray-800');
+                if (isError) {
+                    messageBox.classList.add('bg-red-500', 'text-white');
+                } else {
+                    messageBox.classList.add('bg-white', 'text-gray-800');
+                }
+                messageBox.style.display = 'block';
+                overlay.style.display = 'block';
+            };
 
-    function placeOrder() {
-      const name = document.getElementById('name').value.trim();
-      const address = document.getElementById('address').value.trim();
-      const pincode = document.getElementById('pincode').value.trim();
-      const payment = document.getElementById('payment').value;
+            closeMessageBtn.addEventListener('click', () => {
+                messageBox.style.display = 'none';
+                overlay.style.display = 'none';
+                window.location.href = 'product.html';
+            });
 
-      if (!name || !address || !pincode || !payment) {
-        alert("Please fill all fields before placing the order.");
-        return;
-      }
+            checkoutForm.addEventListener('submit', (e) => {
+                e.preventDefault();
 
-      // Clear cart
-      localStorage.removeItem('cart');
+                const name = document.getElementById('name').value.trim();
+                const address = document.getElementById('address').value.trim();
+                const pincode = document.getElementById('pincode').value.trim();
+                const payment = document.getElementById('payment').value;
 
-      alert("Order placed successfully!\nThank you for shopping with us.");
-      window.location.href = "product.html";
-    }
-  </script>
+                if (!name || !address || !pincode || !payment) {
+                    showMessage('Please fill in all fields to place your order.', true);
+                    return;
+                }
+                
+                const cart = getCart();
+                if (cart.length === 0) {
+                     showMessage('Your cart is empty. Please add items before placing an order.', true);
+                     return;
+                }
+                
+                const order = {
+                    items: cart,
+                    total: cart.reduce((sum, item) => sum + (item.price * item.quantity), 0),
+                    details: {
+                        name,
+                        address,
+                        pincode,
+                        payment
+                    },
+                    date: new Date().toISOString()
+                };
+
+                const orders = JSON.parse(localStorage.getItem('orders')) || [];
+                orders.push(order);
+                localStorage.setItem('orders', JSON.stringify(orders));
+
+                saveCart([]);
+                updateCartCount();
+                showMessage('Order placed successfully! Thank you for your purchase.');
+            });
+
+            updateCartCount();
+            renderSummary();
+        });
+    </script>
 </body>
 </html>

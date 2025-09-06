@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -99,4 +99,162 @@
     }
   </script>
 </body>
-</html> 
+</html>  -->
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Your Cart</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7f3ef;
+        }
+    </style>
+</head>
+<body class="bg-[#f7f3ef] min-h-screen flex flex-col">
+
+    <!-- Top Navigation Bar -->
+    <header class="bg-white shadow-md p-4 sticky top-0 z-50">
+        <nav class="flex justify-between items-center max-w-7xl mx-auto">
+            <div class="flex items-center space-x-2">
+                <a href="index.html" class="flex items-center space-x-2 text-gray-800 hover:text-orange-500">
+                    <svg class="h-8 w-8 text-orange-500" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2ZM12 4C16.4183 4 20 7.58172 20 12C20 16.4183 16.4183 20 12 20C7.58172 20 4 16.4183 4 12C4 7.58172 7.58172 4 12 4ZM12 6C9.79086 6 8 7.79086 8 10C8 12.2091 9.79086 14 12 14C14.2091 14 16 12.2091 16 10C16 7.79086 14.2091 6 12 6ZM12 8C13.1046 8 14 8.89543 14 10C14 11.1046 13.1046 12 12 12C10.8954 12 10 11.1046 10 10C10 8.89543 10.8954 8 12 8ZM12 15C9.33924 15 7.15197 16.712 6.30453 19H17.6955C16.848 16.712 14.6608 15 12 15Z" fill="currentColor"/>
+                    <span class="font-bold text-xl text-gray-800">Furniture Store</span>
+                </a>
+            </div>
+            <div class="flex-grow flex justify-center space-x-6 text-gray-600 font-semibold">
+                <a href="index.html" class="hover:text-orange-500">Home</a>
+                <a href="product.html" class="hover:text-orange-500">Products</a>
+                <a href="orders.html" class="hover:text-orange-500">Orders</a>
+            </div>
+            <div class="flex items-center space-x-4">
+                <a href="cart.html" class="relative">
+                    <i class="fa-solid fa-cart-shopping text-gray-800 text-lg"></i>
+                    <span id="cart-count" class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full px-2 py-0.5">0</span>
+                </a>
+                <a href="profile.html" class="flex items-center space-x-1 text-gray-800 hover:text-orange-500">
+                    <i class="fa-solid fa-user"></i>
+                    <span>Profile</span>
+                </a>
+                <a href="signout.html" class="flex items-center space-x-1 text-gray-800 hover:text-orange-500">
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                    <span>Sign Out</span>
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="max-w-4xl mx-auto p-8 flex-grow">
+        <h1 class="text-4xl font-bold text-gray-800 mb-8">Your Shopping Cart</h1>
+
+        <div id="cart-items" class="bg-white rounded-lg shadow-md p-6 mb-8">
+            <!-- Cart items will be rendered here by JavaScript -->
+        </div>
+
+        <div class="flex flex-col md:flex-row justify-between items-center bg-white rounded-lg shadow-md p-6">
+            <h2 class="text-2xl font-semibold text-gray-800 mb-4 md:mb-0">Total: <span id="cart-total" class="font-bold">₹0</span></h2>
+            <button id="checkout-btn" class="bg-orange-500 text-white px-6 py-3 rounded-lg font-semibold text-lg transition-colors duration-300 hover:bg-orange-600">Checkout</button>
+        </div>
+    </main>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const cartItemsContainer = document.getElementById('cart-items');
+            const cartTotalElement = document.getElementById('cart-total');
+            const cartCountElement = document.getElementById('cart-count');
+            const checkoutBtn = document.getElementById('checkout-btn');
+
+            const getCart = () => {
+                return JSON.parse(localStorage.getItem('cart')) || [];
+            };
+
+            const saveCart = (cart) => {
+                localStorage.setItem('cart', JSON.stringify(cart));
+            };
+
+            const updateCartCount = () => {
+                const cart = getCart();
+                const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+                cartCountElement.textContent = totalItems;
+            };
+
+            const renderCartItems = () => {
+                const cart = getCart();
+                cartItemsContainer.innerHTML = '';
+                let total = 0;
+
+                if (cart.length === 0) {
+                    cartItemsContainer.innerHTML = '<p class="text-gray-500 text-center">Your cart is empty.</p>';
+                    cartTotalElement.textContent = '₹0';
+                    return;
+                }
+
+                cart.forEach(item => {
+                    const itemTotal = item.price * item.quantity;
+                    total += itemTotal;
+
+                    const itemElement = document.createElement('div');
+                    itemElement.classList.add('flex', 'flex-col', 'sm:flex-row', 'items-center', 'justify-between', 'mb-4', 'pb-4', 'border-b', 'border-gray-200');
+                    itemElement.innerHTML = `
+                        <div class="flex items-center space-x-4 mb-2 sm:mb-0">
+                            <img src="${item.image}" alt="${item.name}" class="h-16 w-16 object-cover rounded-lg">
+                            <div>
+                                <h3 class="font-semibold text-gray-800">${item.name}</h3>
+                                <p class="text-gray-600 text-sm">₹${item.price.toLocaleString()}</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <p class="text-gray-600">Quantity: ${item.quantity}</p>
+                            <p class="font-semibold text-gray-800">₹${itemTotal.toLocaleString()}</p>
+                            <button class="remove-btn bg-red-500 text-white px-2 py-1 rounded-lg text-sm" data-name="${item.name}">Remove</button>
+                        </div>
+                    `;
+                    cartItemsContainer.appendChild(itemElement);
+                });
+
+                cartTotalElement.textContent = `₹${total.toLocaleString()}`;
+
+                document.querySelectorAll('.remove-btn').forEach(button => {
+                    button.addEventListener('click', (e) => {
+                        const productName = e.target.dataset.name;
+                        let cart = getCart();
+                        cart = cart.filter(item => item.name !== productName);
+                        saveCart(cart);
+                        renderCartItems();
+                        updateCartCount();
+                    });
+                });
+            };
+
+            // Add click event listener to the Checkout button
+            checkoutBtn.addEventListener('click', () => {
+                const cart = getCart();
+                if (cart.length === 0) {
+                    alert('Your cart is empty. Please add items before checking out.');
+                } else {
+                    window.location.assign('checkout.html');
+                }
+            });
+
+            updateCartCount();
+            renderCartItems();
+        });
+    </script>
+</body>
+</html>

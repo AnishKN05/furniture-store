@@ -1,340 +1,452 @@
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Products - Furniture Store</title>
-  <link rel="stylesheet" href="css/style.css">
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: #f1f4f8;
-    }
-
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 15px 30px;
-      background-color: #fff;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-    }
-
-    header h1 {
-      margin: 0;
-      font-size: 24px;
-      color: #333;
-    }
-
-    .cart-icon {
-      text-decoration: none;
-      color: #333;
-      font-size: 24px;
-      position: relative;
-    }
-
-    .cart-icon::after {
-      content: "🛒";
-      font-size: 28px;
-    }
-
-    h2 {
-      text-align: center;
-      margin-top: 30px;
-      color: #222;
-    }
-
-    .product-container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      padding: 30px;
-      gap: 30px;
-    }
-
-    .product-card {
-      background-color: white;
-      border-radius: 12px;
-      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-      padding: 20px;
-      width: 250px;
-      text-align: center;
-      transition: transform 0.3s ease;
-    }
-
-    .product-card:hover {
-      transform: scale(1.03);
-    }
-
-    .product-card img {
-      width: 100%;
-      height: 160px;
-      object-fit: cover;
-      border-radius: 8px;
-    }
-
-    .product-card h3 {
-      margin: 12px 0 8px;
-      font-size: 20px;
-      font-weight: 600;
-      color: #222;
-    }
-
-    .product-card p {
-      margin: 6px 0;
-      font-size: 14px;
-      color: #555;
-    }
-
-    .product-card strong {
-      color: #000;
-    }
-
-    .product-card input[type="number"] {
-      width: 60px;
-      padding: 5px;
-      margin-top: 10px;
-      margin-bottom: 10px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-    }
-
-    button {
-      background-color: #0d6efd;
-      color: white;
-      border: none;
-      padding: 10px 18px;
-      border-radius: 8px;
-      margin-top: 8px;
-      cursor: pointer;
-      font-weight: bold;
-      font-size: 14px;
-    }
-
-    button:hover {
-      background-color: #004bbc;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <title>Our Furniture Collection</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7f3ef;
+        }
+    </style>
 </head>
-<body>
+<body class="bg-[#f7f3ef] min-h-screen flex flex-col">
 
-  <header>
-    <h1>Our Furniture Collection</h1>
-    <a href="cart.html" class="cart-icon" title="Go to Cart"></a>
-  </header>
-  <div class="product-container">
-    <!-- Example Products -->
-    <div class="product-card">
-      <img src="https://i.pinimg.com/originals/c7/98/c6/c798c6a5bf958f2a2073ef7e34b28fa1.jpg" alt="Modern Sofa">
-      <h2>Modern Sofa</h2>
-      <p>3-seater comfy sofa</p>
-      <p><strong>₹15,000</strong></p>
-      <input type="number" class="quantity-input" value="1" min="1" />
-      <button onclick="addToCart('Modern Sofa', 15000)">Add to Cart</button>
-    </div>
+    <!-- Top Navigation Bar -->
+    <header class="bg-white shadow-md p-4 sticky top-0 z-50">
+        <nav class="flex justify-between items-center max-w-7xl mx-auto">
+            <div class="flex items-center space-x-2">
+                <a href="index.html" class="flex items-center space-x-2 text-gray-800 hover:text-orange-500">
+                    <svg class="h-8 w-8 text-orange-500" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2ZM12 4C16.4183 4 20 7.58172 20 12C20 16.4183 16.4183 20 12 20C7.58172 20 4 16.4183 4 12C4 7.58172 7.58172 4 12 4ZM12 6C9.79086 6 8 7.79086 8 10C8 12.2091 9.79086 14 12 14C14.2091 14 16 12.2091 16 10C16 7.79086 14.2091 6 12 6ZM12 8C13.1046 8 14 8.89543 14 10C14 11.1046 13.1046 12 12 12C10.8954 12 10 11.1046 10 10C10 8.89543 10.8954 8 12 8ZM12 15C9.33924 15 7.15197 16.712 6.30453 19H17.6955C16.848 16.712 14.6608 15 12 15Z" fill="currentColor"/>
+                    <span class="font-bold text-xl text-gray-800">Furniture Store</span>
+                </a>
+            </div>
+            <div class="flex-grow flex justify-center space-x-6 text-gray-600 font-semibold">
+                <a href="index.html" class="hover:text-orange-500">Home</a>
+                <a href="product.html" class="hover:text-orange-500">Products</a>
+                <a href="orders.html" class="hover:text-orange-500">Orders</a>
+            </div>
+            <div class="flex items-center space-x-4">
+                <a href="cart.html" class="relative">
+                    <i class="fa-solid fa-cart-shopping text-gray-800 text-lg"></i>
+                    <span id="cart-count" class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full px-2 py-0.5">0</span>
+                </a>
+                <a href="profile.html" class="flex items-center space-x-1 text-gray-800 hover:text-orange-500">
+                    <i class="fa-solid fa-user"></i>
+                    <span>Profile</span>
+                </a>
+                <a href="index.html" class="flex items-center space-x-1 text-gray-800 hover:text-orange-500">
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                    <span>Sign Out</span>
+                </a>
+            </div>
+        </nav>
+    </header>
 
-    <div class="product-card">
-      <img src="https://tse3.mm.bing.net/th/id/OIP.S_-pX4GdvlIy-9dHu44uDgHaG9?pid=Api&P=0&h=220" alt="Dining Table">
-      <h2>Dining Table</h2>
-      <p>6-seater wooden table</p>
-      <p><strong>₹22,000</strong></p>
-      <input type="number" class="quantity-input" value="1" min="1" />
-      <button onclick="addToCart('Dining Table', 22000)">Add to Cart</button>
-    </div>
+    <main class="max-w-7xl mx-auto p-8 flex-grow">
+        <!-- Collection Header -->
+        <div class="mb-8">
+            <h1 class="text-4xl font-bold text-gray-800">Our Collection</h1>
+            <p class="text-gray-600 mt-2">Discover beautiful pre-loved furniture pieces</p>
+        </div>
 
-    <div class="product-card">
-      <img src="https://i5.walmartimages.com/asr/21970536-9d11-4e47-b7a8-6bb792285691_1.59d84ece3dafa40a306a5ff49e6efce7.jpeg" alt="Recliner Chair">
-      <h2>Recliner Chair</h2>
-      <p>Comfy recliner chair</p>
-      <p><strong>₹9,500</strong></p>
-      <input type="number" class="quantity-input" value="1" min="1" />
-      <button onclick="addToCart('Recliner Chair', 9500)">Add to Cart</button>
-    </div>
+        <!-- Message Box -->
+        <div id="message-box" class="fixed top-20 left-1/2 -translate-x-1/2 bg-gray-800 text-white text-sm px-4 py-2 rounded-lg shadow-lg z-50 opacity-0 transition-opacity duration-300">Item added to cart!</div>
 
-    <div class="product-card">
-      <img src="https://m.media-amazon.com/images/I/81lzsVHJK-L.jpg" alt="Queen Bed">
-      <h2>Queen Bed</h2>
-      <p>Queen bed with storage</p>
-      <p><strong>₹25,000</strong></p>
-      <input type="number" class="quantity-input" value="1" min="1" />
-      <button onclick="addToCart('Queen Bed', 25000)">Add to Cart</button>
-    </div>
+        <!-- Search and Filter Section -->
+        <div class="bg-white rounded-lg shadow-md p-4 mb-8 border border-gray-200">
+            <div class="flex flex-col md:flex-row items-center gap-4">
+                <!-- Search Input -->
+                <div class="relative flex-grow w-full">
+                    <div class="absolute inset-y-0 left-0 flex items-center pl-3">
+                        <i class="fa-solid fa-search text-gray-400"></i>
+                    </div>
+                    <input type="text" placeholder="Search products..." class="w-full pl-10 pr-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent">
+                </div>
 
-    <div class="product-card">
-      <img src="https://i5.walmartimages.com/asr/62a7918d-cec6-4862-8920-5b35582a4401.2075708e0500063ed4c6cedd42d75b6f.jpeg" alt="TV Stand">
-      <h2>TV Stand</h2>
-      <p>Stylish wooden TV unit</p>
-      <p><strong>₹8,000</strong></p>
-      <input type="number" class="quantity-input" value="1" min="1" />
-      <button onclick="addToCart('TV Stand', 8000)">Add to Cart</button>
-    </div>
+                <!-- Filters -->
+                <div class="flex flex-col sm:flex-row gap-4 w-full md:w-auto">
+                    <!-- Category Filter -->
+                    <div class="relative w-full">
+                        <select class="w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent appearance-none">
+                            <option>Bedroom</option>
+                            <option>Living Room</option>
+                            <option>Dining</option>
+                        </select>
+                        <i class="fa-solid fa-chevron-down absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 pointer-events-none"></i>
+                    </div>
+                    <!-- Condition Filter -->
+                    <div class="relative w-full">
+                        <select class="w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent appearance-none">
+                            <option>All Conditions</option>
+                            <option>New</option>
+                            <option>Used</option>
+                        </select>
+                        <i class="fa-solid fa-chevron-down absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 pointer-events-none"></i>
+                    </div>
+                    <!-- Sort By Filter -->
+                    <div class="relative w-full">
+                        <select class="w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent appearance-none">
+                            <option>Newest First</option>
+                            <option>Price: Low to High</option>
+                            <option>Price: High to Low</option>
+                        </select>
+                        <i class="fa-solid fa-chevron-down absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 pointer-events-none"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-    <div class="product-card">
-      <img src="https://greentechinteriors.in/wp-content/uploads/2023/08/wardrobe-design-scaled.jpg" alt="Wardrobe">
-      <h2>Wardrobe</h2>
-      <p>3-door storage wardrobe</p>
-      <p><strong>₹18,000</strong></p>
-      <input type="number" class="quantity-input" value="1" min="1" />
-      <button onclick="addToCart('Wardrobe', 18000)">Add to Cart</button>
-    </div>
+        <!-- Product Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
 
-    <div class="product-card">
-      <img src="https://menterarchitects.com/wp-content/uploads/2017/09/furniture-round-coffee-table-sets-ideas-dark-brown-modern-solid-intended-for-dark-wood-round-coffee-tables.jpg" alt="Coffee Table">
-      <h2>Coffee Table</h2>
-      <p>Elegant glass table</p>
-      <p><strong>₹6,000</strong></p>
-      <input type="number" class="quantity-input" value="1" min="1" />
-      <button onclick="addToCart('Coffee Table', 6000)">Add to Cart</button>
-    </div>
+            <!-- Product Card 1: Modern Sofa -->
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-2xl">
+                <img src="https://i.pinimg.com/originals/c7/98/c6/c798c6a5bf958f2a2073ef7e34b28fa1.jpg" alt="Modern Sofa" class="w-full h-48 object-cover">
+                <div class="p-4">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-1">Modern Sofa</h3>
+                    <p class="text-sm text-gray-500">3-seater comfy sofa</p>
+                    <div class="flex justify-between items-center mt-4">
+                        <span class="text-lg font-bold text-gray-900">₹15,000</span>
+                        <button class="add-to-cart-btn bg-orange-500 text-white px-4 py-2 rounded-lg font-semibold text-sm transition-colors duration-300 hover:bg-orange-600"
+                                data-name="Modern Sofa" data-price="15000" data-image="https://i.pinimg.com/originals/c7/98/c6/c798c6a5bf958f2a2073ef7e34b28fa1.jpg">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
 
-    <div class="product-card">
-      <img src="https://m.media-amazon.com/images/I/81WcJZtuMOL._AC_SL1500_.jpg" alt="Bookshelf">
-      <h2>Bookshelf</h2>
-      <p>5-layer wooden shelf</p>
-      <p><strong>₹7,200</strong></p>
-      <input type="number" class="quantity-input" value="1" min="1" />
-      <button onclick="addToCart('Bookshelf', 7200)">Add to Cart</button>
-    </div>
+            <!-- Product Card 2: Dining Table -->
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-2xl">
+                <img src="https://tse3.mm.bing.net/th/id/OIP.S_-pX4GdvlIy-9dHu44uDgHaG9?pid=Api&P=0&h=220" alt="Dining Table" class="w-full h-48 object-cover">
+                <div class="p-4">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-1">Dining Table</h3>
+                    <p class="text-sm text-gray-500">6-seater wooden table</p>
+                    <div class="flex justify-between items-center mt-4">
+                        <span class="text-lg font-bold text-gray-900">₹22,000</span>
+                        <button class="add-to-cart-btn bg-orange-500 text-white px-4 py-2 rounded-lg font-semibold text-sm transition-colors duration-300 hover:bg-orange-600"
+                                data-name="Dining Table" data-price="22000" data-image="https://tse3.mm.bing.net/th/id/OIP.S_-pX4GdvlIy-9dHu44uDgHaG9?pid=Api&P=0&h=220">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
 
-    <div class="product-card">
-      <img src="https://m.media-amazon.com/images/I/81-XJyHEUOL.jpg" alt="Office Chair">
-      <h2>Office Chair</h2>
-      <p>Ergonomic chair with wheels</p>
-      <p><strong>₹5,500</strong></p>
-      <input type="number" class="quantity-input" value="1" min="1" />
-      <button onclick="addToCart('Office Chair', 5500)">Add to Cart</button>
-    </div>
+            <!-- Product Card 3: Recliner Chair -->
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-2xl">
+                <img src="https://i5.walmartimages.com/asr/21970536-9d11-4e47-b7a8-6bb792285691_1.59d84ece3dafa40a306a5ff49e6efce7.jpeg" alt="Recliner Chair" class="w-full h-48 object-cover">
+                <div class="p-4">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-1">Recliner Chair</h3>
+                    <p class="text-sm text-gray-500">Comfy recliner chair</p>
+                    <div class="flex justify-between items-center mt-4">
+                        <span class="text-lg font-bold text-gray-900">₹9,500</span>
+                        <button class="add-to-cart-btn bg-orange-500 text-white px-4 py-2 rounded-lg font-semibold text-sm transition-colors duration-300 hover:bg-orange-600"
+                                data-name="Recliner Chair" data-price="9500" data-image="https://i5.walmartimages.com/asr/21970536-9d11-4e47-b7a8-6bb792285691_1.59d84ece3dafa40a306a5ff49e6efce7.jpeg">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
 
-    <div class="product-card">
-      <img src="https://i5.walmartimages.com/asr/63a7cf66-70ab-4fc2-93c3-468726778d51.9202441f1425be7893ed82eb2a2e707c.jpeg" alt="Study Desk">
-      <h2>Study Desk</h2>
-      <p>Compact wooden desk</p>
-      <p><strong>₹6,800</strong></p>
-      <input type="number" class="quantity-input" value="1" min="1" />
-      <button onclick="addToCart('Study Desk', 6800)">Add to Cart</button>
-    </div>
+            <!-- Product Card 4: Queen Bed -->
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-2xl">
+                <img src="https://m.media-amazon.com/images/I/81lzsVHJK-L.jpg" alt="Queen Bed" class="w-full h-48 object-cover">
+                <div class="p-4">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-1">Queen Bed</h3>
+                    <p class="text-sm text-gray-500">Queen bed with storage</p>
+                    <div class="flex justify-between items-center mt-4">
+                        <span class="text-lg font-bold text-gray-900">₹25,000</span>
+                        <button class="add-to-cart-btn bg-orange-500 text-white px-4 py-2 rounded-lg font-semibold text-sm transition-colors duration-300 hover:bg-orange-600"
+                                data-name="Queen Bed" data-price="25000" data-image="https://m.media-amazon.com/images/I/81lzsVHJK-L.jpg">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
 
-    <div class="product-card">
-      <img src="https://foter.com/photos/420/decorative-square-wall-shelf.jpeg" alt="Wall Shelf">
-      <h2>Wall Shelf</h2>
-      <p>Floating shelf set of 3</p>
-      <p><strong>₹2,200</strong></p>
-      <input type="number" class="quantity-input" value="1" min="1" />
-      <button onclick="addToCart('Wall Shelf', 2200)">Add to Cart</button>
-    </div>
+            <!-- Product Card 5: TV Stand -->
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-2xl">
+                <img src="https://i5.walmartimages.com/asr/62a7918d-cec6-4862-8920-5b35582a4401.2075708e0500063ed4c6cedd42d75b6f.jpeg" alt="TV Stand" class="w-full h-48 object-cover">
+                <div class="p-4">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-1">TV Stand</h3>
+                    <p class="text-sm text-gray-500">Stylish wooden TV unit</p>
+                    <div class="flex justify-between items-center mt-4">
+                        <span class="text-lg font-bold text-gray-900">₹8,000</span>
+                        <button class="add-to-cart-btn bg-orange-500 text-white px-4 py-2 rounded-lg font-semibold text-sm transition-colors duration-300 hover:bg-orange-600"
+                                data-name="TV Stand" data-price="8000" data-image="https://i5.walmartimages.com/asr/62a7918d-cec6-4862-8920-5b35582a4401.2075708e0500063ed4c6cedd42d75b6f.jpeg">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
 
-    <div class="product-card">
-      <img src="https://tse3.mm.bing.net/th/id/OIP.fL46JSztuVr2taIkH-n6igHaHa?pid=Api&P=0&h=220" alt="Side Table">
-      <h2>Side Table</h2>
-      <p>Wooden end table</p>
-      <p><strong>₹3,000</strong></p>
-      <input type="number" class="quantity-input" value="1" min="1" />
-      <button onclick="addToCart('Side Table', 3000)">Add to Cart</button>
-    </div>
+            <!-- Product Card 6: Wardrobe -->
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-2xl">
+                <img src="https://greentechinteriors.in/wp-content/uploads/2023/08/wardrobe-design-scaled.jpg" alt="Wardrobe" class="w-full h-48 object-cover">
+                <div class="p-4">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-1">Wardrobe</h3>
+                    <p class="text-sm text-gray-500">3-door storage wardrobe</p>
+                    <div class="flex justify-between items-center mt-4">
+                        <span class="text-lg font-bold text-gray-900">₹18,000</span>
+                        <button class="add-to-cart-btn bg-orange-500 text-white px-4 py-2 rounded-lg font-semibold text-sm transition-colors duration-300 hover:bg-orange-600"
+                                data-name="Wardrobe" data-price="18000" data-image="https://greentechinteriors.in/wp-content/uploads/2023/08/wardrobe-design-scaled.jpg">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
 
-    <div class="product-card">
-      <img src="https://m.media-amazon.com/images/I/71Ag3ZttNYL.jpg" alt="Mirror">
-      <h2>Wall Mirror</h2>
-      <p>Decorative oval mirror</p>
-      <p><strong>₹1,800</strong></p>
-      <input type="number" class="quantity-input" value="1" min="1" />
-      <button onclick="addToCart('Wall Mirror', 1800)">Add to Cart</button>
-    </div>
+            <!-- Product Card 7: Coffee Table -->
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-2xl">
+                <img src="https://menterarchitects.com/wp-content/uploads/2017/09/furniture-round-coffee-table-sets-ideas-dark-brown-modern-solid-intended-for-dark-wood-round-coffee-tables.jpg" alt="Coffee Table" class="w-full h-48 object-cover">
+                <div class="p-4">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-1">Coffee Table</h3>
+                    <p class="text-sm text-gray-500">Elegant glass table</p>
+                    <div class="flex justify-between items-center mt-4">
+                        <span class="text-lg font-bold text-gray-900">₹6,000</span>
+                        <button class="add-to-cart-btn bg-orange-500 text-white px-4 py-2 rounded-lg font-semibold text-sm transition-colors duration-300 hover:bg-orange-600"
+                                data-name="Coffee Table" data-price="6000" data-image="https://menterarchitects.com/wp-content/uploads/2017/09/furniture-round-coffee-table-sets-ideas-dark-brown-modern-solid-intended-for-dark-wood-round-coffee-tables.jpg">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
 
-    <div class="product-card">
-      <img src="https://i5.walmartimages.com/asr/7190c88e-fb59-42b6-a4cb-599afbee9461.7d45fad3fcc70c4d0e2d9d2e436b8e1a.jpeg" alt="Bar Stool">
-      <h2>Bar Stool</h2>
-      <p>Adjustable steel stool</p>
-      <p><strong>₹2,800</strong></p>
-      <input type="number" class="quantity-input" value="1" min="1" />
-      <button onclick="addToCart('Bar Stool', 2800)">Add to Cart</button>
-    </div>
+            <!-- Product Card 8: Bookshelf -->
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-2xl">
+                <img src="https://m.media-amazon.com/images/I/81WcJZtuMOL._AC_SL1500_.jpg" alt="Bookshelf" class="w-full h-48 object-cover">
+                <div class="p-4">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-1">Bookshelf</h3>
+                    <p class="text-sm text-gray-500">5-layer wooden shelf</p>
+                    <div class="flex justify-between items-center mt-4">
+                        <span class="text-lg font-bold text-gray-900">₹7,200</span>
+                        <button class="add-to-cart-btn bg-orange-500 text-white px-4 py-2 rounded-lg font-semibold text-sm transition-colors duration-300 hover:bg-orange-600"
+                                data-name="Bookshelf" data-price="7200" data-image="https://m.media-amazon.com/images/I/81WcJZtuMOL._AC_SL1500_.jpg">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
 
-    <div class="product-card">
-      <img src="https://hips.hearstapps.com/hmg-prod/images/ladwig-home-highres-27-1666963207.jpg?crop=0.999875015623047xw:1xh;center,top&resize=980:*" alt="Cabinet">
-      <h2>Kitchen Cabinet</h2>
-      <p>Modular storage unit</p>
-      <p><strong>₹12,000</strong></p>
-      <input type="number" class="quantity-input" value="1" min="1" />
-      <button onclick="addToCart('Kitchen Cabinet', 12000)">Add to Cart</button>
-    </div>
+            <!-- Product Card 9: Office Chair -->
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-2xl">
+                <img src="https://m.media-amazon.com/images/I/81-XJyHEUOL.jpg" alt="Office Chair" class="w-full h-48 object-cover">
+                <div class="p-4">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-1">Office Chair</h3>
+                    <p class="text-sm text-gray-500">Ergonomic chair with wheels</p>
+                    <div class="flex justify-between items-center mt-4">
+                        <span class="text-lg font-bold text-gray-900">₹5,500</span>
+                        <button class="add-to-cart-btn bg-orange-500 text-white px-4 py-2 rounded-lg font-semibold text-sm transition-colors duration-300 hover:bg-orange-600"
+                                data-name="Office Chair" data-price="5500" data-image="https://m.media-amazon.com/images/I/81-XJyHEUOL.jpg">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
 
-    <!-- Add 5 more below similarly -->
-    <div class="product-card">
-      <img src="https://tse1.mm.bing.net/th/id/OIP.aCJnsEWQub7n3GtfRQENPwHaF0?pid=Api&P=0&h=220" alt="Bench">
-      <h2>Entryway Bench</h2>
-      <p>Seating with storage</p>
-      <p><strong>₹4,000</strong></p>
-      <input type="number" class="quantity-input" value="1" min="1" />
-      <button onclick="addToCart('Entryway Bench', 4000)">Add to Cart</button>
-    </div>
+            <!-- Product Card 10: Study Desk -->
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-2xl">
+                <img src="https://i5.walmartimages.com/asr/63a7cf66-70ab-4fc2-93c3-468726778d51.9202441f1425be7893ed82eb2a2e707c.jpeg" alt="Study Desk" class="w-full h-48 object-cover">
+                <div class="p-4">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-1">Study Desk</h3>
+                    <p class="text-sm text-gray-500">Compact wooden desk</p>
+                    <div class="flex justify-between items-center mt-4">
+                        <span class="text-lg font-bold text-gray-900">₹6,800</span>
+                        <button class="add-to-cart-btn bg-orange-500 text-white px-4 py-2 rounded-lg font-semibold text-sm transition-colors duration-300 hover:bg-orange-600"
+                                data-name="Study Desk" data-price="6800" data-image="https://i5.walmartimages.com/asr/63a7cf66-70ab-4fc2-93c3-468726778d51.9202441f1425be7893ed82eb2a2e707c.jpeg">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
 
-    <div class="product-card">
-      <img src="https://i5.walmartimages.com/asr/a8548550-8617-4ed1-8e0a-99782793682a_1.26d5d396a5c4c6cb2cc6c43688134d5e.jpeg" alt="Lamp">
-      <h2>Floor Lamp</h2>
-      <p>Stylish standing lamp</p>
-      <p><strong>₹1,900</strong></p>
-      <input type="number" class="quantity-input" value="1" min="1" />
-      <button onclick="addToCart('Floor Lamp', 1900)">Add to Cart</button>
-    </div>
+            <!-- Product Card 11: Wall Shelf -->
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-2xl">
+                <img src="https://foter.com/photos/420/decorative-square-wall-shelf.jpeg" alt="Wall Shelf" class="w-full h-48 object-cover">
+                <div class="p-4">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-1">Wall Shelf</h3>
+                    <p class="text-sm text-gray-500">Floating shelf set of 3</p>
+                    <div class="flex justify-between items-center mt-4">
+                        <span class="text-lg font-bold text-gray-900">₹2,200</span>
+                        <button class="add-to-cart-btn bg-orange-500 text-white px-4 py-2 rounded-lg font-semibold text-sm transition-colors duration-300 hover:bg-orange-600"
+                                data-name="Wall Shelf" data-price="2200" data-image="https://foter.com/photos/420/decorative-square-wall-shelf.jpeg">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
 
-    <div class="product-card">
-      <img src="https://images.woodenstreet.de/image/data/bunk-beds/cheshire-bunk-bed-revised/honey/updated/1.jpg" alt="Kids Bed">
-      <h2>Kids Bed</h2>
-      <p>Colorful bunk bed</p>
-      <p><strong>₹16,000</strong></p>
-      <input type="number" class="quantity-input" value="1" min="1" />
-      <button onclick="addToCart('Kids Bed', 16000)">Add to Cart</button>
-    </div>
+            <!-- Product Card 12: Side Table -->
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-2xl">
+                <img src="https://tse3.mm.bing.net/th/id/OIP.fL46JSztuVr2taIkH-n6igHaHa?pid=Api&P=0&h=220" alt="Side Table" class="w-full h-48 object-cover">
+                <div class="p-4">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-1">Side Table</h3>
+                    <p class="text-sm text-gray-500">Wooden end table</p>
+                    <div class="flex justify-between items-center mt-4">
+                        <span class="text-lg font-bold text-gray-900">₹3,000</span>
+                        <button class="add-to-cart-btn bg-orange-500 text-white px-4 py-2 rounded-lg font-semibold text-sm transition-colors duration-300 hover:bg-orange-600"
+                                data-name="Side Table" data-price="3000" data-image="https://tse3.mm.bing.net/th/id/OIP.fL46JSztuVr2taIkH-n6igHaHa?pid=Api&P=0&h=220">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
 
-    <div class="product-card">
-      <img src="https://images.woodenstreet.de/image/data/rocking-chairs/marcus-wooden-handmade-pure-sheesham-wood-rocking-chair-wooden-recliner/updated/1.jpg" alt="Rocking Chair">
-      <h2>Rocking Chair</h2>
-      <p>Classic wooden design</p>
-      <p><strong>₹5,700</strong></p>
-      <input type="number" class="quantity-input" value="1" min="1" />
-      <button onclick="addToCart('Rocking Chair', 5700)">Add to Cart</button>
-    </div>
+            <!-- Product Card 13: Wall Mirror -->
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-2xl">
+                <img src="https://m.media-amazon.com/images/I/71Ag3ZttNYL.jpg" alt="Wall Mirror" class="w-full h-48 object-cover">
+                <div class="p-4">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-1">Wall Mirror</h3>
+                    <p class="text-sm text-gray-500">Decorative oval mirror</p>
+                    <div class="flex justify-between items-center mt-4">
+                        <span class="text-lg font-bold text-gray-900">₹1,800</span>
+                        <button class="add-to-cart-btn bg-orange-500 text-white px-4 py-2 rounded-lg font-semibold text-sm transition-colors duration-300 hover:bg-orange-600"
+                                data-name="Wall Mirror" data-price="1800" data-image="https://m.media-amazon.com/images/I/71Ag3ZttNYL.jpg">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
 
-    <div class="product-card">
-      <img src="https://i5.walmartimages.com/asr/c0aae0f9-7438-4fc1-ab68-87a49c4f17ab_1.c2f7d67d54fcd8076715a3e0718a7fd3.jpeg" alt="Storage Box">
-      <h2>Storage Box</h2>
-      <p>Under-bed storage container</p>
-      <p><strong>₹1,300</strong></p>
-      <input type="number" class="quantity-input" value="1" min="1" />
-      <button onclick="addToCart('Storage Box', 1300)">Add to Cart</button>
-    </div>
+            <!-- Product Card 14: Bar Stool -->
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-2xl">
+                <img src="https://i5.walmartimages.com/asr/7190c88e-fb59-42b6-a4cb-599afbee9461.7d45fad3fcc70c4d0e2d9d2e436b8e1a.jpeg" alt="Bar Stool" class="w-full h-48 object-cover">
+                <div class="p-4">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-1">Bar Stool</h3>
+                    <p class="text-sm text-gray-500">Adjustable steel stool</p>
+                    <div class="flex justify-between items-center mt-4">
+                        <span class="text-lg font-bold text-gray-900">₹2,800</span>
+                        <button class="add-to-cart-btn bg-orange-500 text-white px-4 py-2 rounded-lg font-semibold text-sm transition-colors duration-300 hover:bg-orange-600"
+                                data-name="Bar Stool" data-price="2800" data-image="https://i5.walmartimages.com/asr/7190c88e-fb59-42b6-a4cb-599afbee9461.7d45fad3fcc70c4d0e2d9d2e436b8e1a.jpeg">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
 
- 
-  </div>
+            <!-- Product Card 15: Kitchen Cabinet -->
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-2xl">
+                <img src="https://hips.hearstapps.com/hmg-prod/images/ladwig-home-highres-27-1666963207.jpg?crop=0.999875015623047xw:1xh;center,top&resize=980:*" alt="Kitchen Cabinet" class="w-full h-48 object-cover">
+                <div class="p-4">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-1">Kitchen Cabinet</h3>
+                    <p class="text-sm text-gray-500">Modular storage unit</p>
+                    <div class="flex justify-between items-center mt-4">
+                        <span class="text-lg font-bold text-gray-900">₹12,000</span>
+                        <button class="add-to-cart-btn bg-orange-500 text-white px-4 py-2 rounded-lg font-semibold text-sm transition-colors duration-300 hover:bg-orange-600"
+                                data-name="Kitchen Cabinet" data-price="12000" data-image="https://hips.hearstapps.com/hmg-prod/images/ladwig-home-highres-27-1666963207.jpg?crop=0.999875015623047xw:1xh;center,top&resize=980:*">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
 
-  <script src="js/main.js"></script>
-  <script>
-   document.querySelectorAll('.add-to-cart').forEach(button => {
-    button.addEventListener('click', () => {
-      const card = button.closest('.product-card');
+            <!-- Product Card 16: Entryway Bench -->
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-2xl">
+                <img src="https://tse1.mm.bing.net/th/id/OIP.aCJnsEWQub7n3GtfRQENPwHaF0?pid=Api&P=0&h=220" alt="Entryway Bench" class="w-full h-48 object-cover">
+                <div class="p-4">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-1">Entryway Bench</h3>
+                    <p class="text-sm text-gray-500">Seating with storage</p>
+                    <div class="flex justify-between items-center mt-4">
+                        <span class="text-lg font-bold text-gray-900">₹4,000</span>
+                        <button class="add-to-cart-btn bg-orange-500 text-white px-4 py-2 rounded-lg font-semibold text-sm transition-colors duration-300 hover:bg-orange-600"
+                                data-name="Entryway Bench" data-price="4000" data-image="https://tse1.mm.bing.net/th/id/OIP.aCJnsEWQub7n3GtfRQENPwHaF0?pid=Api&P=0&h=220">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Product Card 17: Floor Lamp -->
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-2xl">
+                <img src="https://i5.walmartimages.com/asr/a8548550-8617-4ed1-8e0a-99782793682a_1.26d5d396a5c4c6cb2cc6c43688134d5e.jpeg" alt="Floor Lamp" class="w-full h-48 object-cover">
+                <div class="p-4">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-1">Floor Lamp</h3>
+                    <p class="text-sm text-gray-500">Stylish standing lamp</p>
+                    <div class="flex justify-between items-center mt-4">
+                        <span class="text-lg font-bold text-gray-900">₹1,900</span>
+                        <button class="add-to-cart-btn bg-orange-500 text-white px-4 py-2 rounded-lg font-semibold text-sm transition-colors duration-300 hover:bg-orange-600"
+                                data-name="Floor Lamp" data-price="1900" data-image="https://i5.walmartimages.com/asr/a8548550-8617-4ed1-8e0a-99782793682a_1.26d5d396a5c4c6cb2cc6c43688134d5e.jpeg">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
 
-      const name = card.querySelector('.card-title').textContent;
-      const description = card.querySelector('.card-desc').textContent;
-      const priceText = card.querySelector('.card-price').textContent;
-      const quantity = parseInt(card.querySelector('.quantity-input').value);
+            <!-- Product Card 18: Kids Bed -->
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-2xl">
+                <img src="https://images.woodenstreet.de/image/data/bunk-beds/cheshire-bunk-bed-revised/honey/updated/1.jpg" alt="Kids Bed" class="w-full h-48 object-cover">
+                <div class="p-4">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-1">Kids Bed</h3>
+                    <p class="text-sm text-gray-500">Colorful bunk bed</p>
+                    <div class="flex justify-between items-center mt-4">
+                        <span class="text-lg font-bold text-gray-900">₹16,000</span>
+                        <button class="add-to-cart-btn bg-orange-500 text-white px-4 py-2 rounded-lg font-semibold text-sm transition-colors duration-300 hover:bg-orange-600"
+                                data-name="Kids Bed" data-price="16000" data-image="https://images.woodenstreet.de/image/data/bunk-beds/cheshire-bunk-bed-revised/honey/updated/1.jpg">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Product Card 19: Rocking Chair -->
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-2xl">
+                <img src="https://images.woodenstreet.de/image/data/rocking-chairs/marcus-wooden-handmade-pure-sheesham-wood-rocking-chair-wooden-recliner/updated/1.jpg" alt="Rocking Chair" class="w-full h-48 object-cover">
+                <div class="p-4">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-1">Rocking Chair</h3>
+                    <p class="text-sm text-gray-500">Classic wooden design</p>
+                    <div class="flex justify-between items-center mt-4">
+                        <span class="text-lg font-bold text-gray-900">₹5,700</span>
+                        <button class="add-to-cart-btn bg-orange-500 text-white px-4 py-2 rounded-lg font-semibold text-sm transition-colors duration-300 hover:bg-orange-600"
+                                data-name="Rocking Chair" data-price="5700" data-image="https://images.woodenstreet.de/image/data/rocking-chairs/marcus-wooden-handmade-pure-sheesham-wood-rocking-chair-wooden-recliner/updated/1.jpg">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Product Card 20: Storage Box -->
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-2xl">
+                <img src="https://i5.walmartimages.com/asr/c0aae0f9-7438-4fc1-ab68-87a49c4f17ab_1.c2f7d67d54fcd8076715a3e0718a7fd3.jpeg" alt="Storage Box" class="w-full h-48 object-cover">
+                <div class="p-4">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-1">Storage Box</h3>
+                    <p class="text-sm text-gray-500">Under-bed storage container</p>
+                    <div class="flex justify-between items-center mt-4">
+                        <span class="text-lg font-bold text-gray-900">₹1,300</span>
+                        <button class="add-to-cart-btn bg-orange-500 text-white px-4 py-2 rounded-lg font-semibold text-sm transition-colors duration-300 hover:bg-orange-600"
+                                data-name="Storage Box" data-price="1300" data-image="https://i5.walmartimages.com/asr/c0aae0f9-7438-4fc1-ab68-87a49c4f17ab_1.c2f7d67d54fcd8076715a3e0718a7fd3.jpeg">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
 
-      if (isNaN(quantity) || quantity < 1) {
-        alert("Please enter a valid quantity.");
-        return;
-      }
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const cartButtons = document.querySelectorAll('.add-to-cart-btn');
+            const cartCountElement = document.getElementById('cart-count');
+            const messageBox = document.getElementById('message-box');
 
-      const price = parseInt(priceText.replace(/[^\d]/g, ''));
+            const getCart = () => {
+                return JSON.parse(localStorage.getItem('cart')) || [];
+            };
 
-      for (let i = 0; i < quantity; i++) {
-        addToCart(name, description, price);
-      }
-    });
-  });
-  </script>
+            const saveCart = (cart) => {
+                localStorage.setItem('cart', JSON.stringify(cart));
+            };
+
+            const updateCartCount = () => {
+                const cart = getCart();
+                const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+                cartCountElement.textContent = totalItems;
+            };
+
+            const showMessage = (message) => {
+                messageBox.textContent = message;
+                messageBox.classList.remove('opacity-0');
+                messageBox.classList.add('opacity-100');
+                setTimeout(() => {
+                    messageBox.classList.remove('opacity-100');
+                    messageBox.classList.add('opacity-0');
+                }, 2000);
+            };
+
+            cartButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const productName = button.dataset.name;
+                    const productPrice = parseInt(button.dataset.price);
+                    const productImage = button.dataset.image;
+
+                    let cart = getCart();
+                    const existingItem = cart.find(item => item.name === productName);
+
+                    if (existingItem) {
+                        existingItem.quantity += 1;
+                    } else {
+                        cart.push({
+                            name: productName,
+                            price: productPrice,
+                            image: productImage,
+                            quantity: 1
+                        });
+                    }
+
+                    saveCart(cart);
+                    updateCartCount();
+                    showMessage(`${productName} added to cart!`);
+                });
+            });
+
+            updateCartCount();
+        });
+    </script>
 </body>
 </html>
